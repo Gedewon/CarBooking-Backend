@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       devise_for :users, controllers: { sessions: :sessions },
                          path_names: { sign_in: :login }
       resource :user, only: %i[index show update]
+      match '/users',   to: 'users#index',   via: 'get'
     end
   end
 end
