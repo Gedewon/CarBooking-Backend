@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   namespace :api do
-    namespace :v1 do
+    namespace :v1, defaults: { format: :json } do
       resources :books
-      devise_for :users
+      devise_for :users, controllers: { sessions: :sessions },
+                       path_names: { sign_in: :login }
     end
   end
 
