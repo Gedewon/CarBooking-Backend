@@ -10,9 +10,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1, defaults: { format: :json } do
       devise_for :users, controllers: { sessions: :sessions },
-                       path_names: { sign_in: :login }
-      resource :user, only: [:show, :update]
+                         path_names: { sign_in: :login }
+      resource :user, only: %i[index show update]
     end
   end
-
 end
