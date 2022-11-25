@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   namespace :api do
     namespace :v1 do
+      get 'registrations/index'
       resources :cars
     end
   end
