@@ -9,7 +9,7 @@ class Session < ApplicationRecord
   before_validation :generate_token, on: :create
   after_create :used
 
-  def is_late?
+  def late?
     if (last_used_at + TOKEN_LIFETIME) >= Time.now
       false
     else

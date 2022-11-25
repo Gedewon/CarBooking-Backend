@@ -18,7 +18,7 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def destroy
-    headers = request.headers['Authorization'].split(' ').last
+    headers = request.headers['Authorization'].split.last
     session = Session.find_by(token: JsonWebToken.decode(headers)[:token])
     session.close
     success_session_destroy

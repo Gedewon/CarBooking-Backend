@@ -1,6 +1,6 @@
 class JsonWebToken
   require 'jwt'
-  SECRET_KEY = ENV['JWT_SECRET']
+  SECRET_KEY = ENV.fetch('JWT_SECRET', nil)
   JWT_EXPIRY = 1.days
 
   def self.encode(payload, exp = JWT_EXPIRY.from_now)
