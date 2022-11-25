@@ -2,7 +2,7 @@ class Session < ApplicationRecord
   belongs_to :user
   TOKEN_LENGTH = 32
   TOKEN_LIFETIME = 1.hours
-  validates :token, presence: true, uniqueness: {case_sensitive: true}
+  validates :token, presence: true, uniqueness: { case_sensitive: true }
 
   belongs_to :user
 
@@ -18,7 +18,7 @@ class Session < ApplicationRecord
     end
   end
 
-  def self.search user_id, token
+  def self.search(user_id, token)
     Session.find_by(token: token, status: true, user_id: user_id)
   end
 
@@ -37,5 +37,4 @@ class Session < ApplicationRecord
     end
     self.status = true
   end
-
 end

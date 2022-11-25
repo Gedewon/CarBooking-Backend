@@ -6,12 +6,11 @@ class Api::V1::RegistrationsController < ApplicationController
 
     if @user.save
       @token = jwt_session_create @user.id
-      if @token
-        @token = "Bearer #{@token}"
-        return success_user_created
-      else
-        return error_token_create
-      end
+      return error_token_create unless @token
+
+      @token = "Bearer #{@token}"
+      success_user_created
+
     else
       error_user_save
     end
@@ -21,7 +20,7 @@ class Api::V1::RegistrationsController < ApplicationController
 
   def success_user_created
     response.headers['Authorization'] = "Bearer #{@token}"
-    render status: :created, template: "auth/auth"
+    render status: :created, template: 'auth/auth'
   end
 
   def error_token_create
@@ -37,5 +36,4 @@ class Api::V1::RegistrationsController < ApplicationController
   def registration_params
     params.permit(:name, :password)
   end
-
 end

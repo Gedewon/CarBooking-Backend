@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # create sessino's
-      post "auth/sign_up", to: "registrations#create"
-      post "auth/sign_in", to: "sessions#create"
-      delete "auth/sign_out", to: "sessions#destroy"
-      
+      post 'auth/sign_up', to: 'registrations#create'
+      post 'auth/sign_in', to: 'sessions#create'
+      delete 'auth/sign_out', to: 'sessions#destroy'
+
       resources :cars
     end
   end
