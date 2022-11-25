@@ -3,10 +3,12 @@ module AuthenticateRequest
     require 'json_web_token'
   
     def authenticate_user
+        puts 'auth-user'
       return render status: :unauthorized, json: {errors: [I18n.t('errors.controllers.auth.unauthenticated')]} unless current_user
     end
   
     def current_user
+        puts  JsonWebToken.decode(request.headers['Authorization'].split(' ').last)
       @current_user = nil
       if decoded_token
         data = decoded_token

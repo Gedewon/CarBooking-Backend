@@ -4,8 +4,8 @@ class Api::V1::SessionsController < ApplicationController
   before_action :authenticate_user, only: [:validate_token, :destroy]
   
   def create
-    return error_insufficient_params unless params[:email].present? && params[:password].present?
-    @user = User.find_by(email: params[:email])
+    return error_insufficient_params unless params[:name].present? && params[:password].present?
+    @user = User.find_by(name: params[:name])
     if @user
       if @user.authenticate(params[:password])
         @token = jwt_session_create @user.id
@@ -34,14 +34,10 @@ class Api::V1::SessionsController < ApplicationController
   protected
 
   def success_session_created
-    response.headers['Authorization'] = "Bearer #{@token}"
-    render json:{}, status: :created
+    response.headers['Authorization'] = @token
+    render json:{token:@token}, status: :created
   end
 
-  def success_valid_token
-    response.headers['Authorization'] = "Bearer #{@token}"
-    render json:{}, status: :ok
-  end
 
   def success_session_destroy
     render status: :no_content, json: {}
