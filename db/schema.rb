@@ -50,7 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_000919) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "unique"
     t.string "password_digest"
     t.string "role", default: "website_user"
     t.datetime "created_at", null: false

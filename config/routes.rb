@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       post 'auth/sign_up', to: 'registrations#create'
       post 'auth/sign_in', to: 'sessions#create'
       delete 'auth/sign_out', to: 'sessions#destroy'
-
+      resources :reservations
       resources :cars
     end
   end
