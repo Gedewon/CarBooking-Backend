@@ -1,18 +1,15 @@
 class Api::V1::ReservationsController < ApplicationController
-  before_action :set_car, only: %i[show update destroy]
-
-  # GET /cars
+  before_action :set_reservation, only: %i[show update destroy]
+  before_action :authenticate_user
   def index
-    @cars = Car.all
-    render json: @cars
+    @reservation = Reservation.where(user: current_user)
+    render json: @reservation
   end
 
-  # GET /cars/1
   def show
-    render json: @car
+    render json: @reservation
   end
 
-  # POST /cars
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
@@ -23,31 +20,25 @@ class Api::V1::ReservationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cars/1
   def update
-    if @car.update(car_params)
-      render json: @car
+    if @reservation.update(reservation_params)
+      render json: @reservation
     else
-      render json: @car.errors, status: :unprocessable_entity
+      render json: @reservation.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /cars/1
   def destroy
-    @car.destroy
+    @reservation.destroy
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_car
-    @car = Car.find(params[:id])
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def reservation_params
-    params.require(:reservations).permit(:start_date, :end_date, :city,:car_id)
+    params.require(:reservation).permit(:start_date, :end_date, :city, :car_id)
   end
-end
-
 end
