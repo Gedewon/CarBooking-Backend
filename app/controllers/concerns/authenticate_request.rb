@@ -3,7 +3,6 @@ module AuthenticateRequest
   require 'json_web_token'
 
   def authenticate_user
-    puts 'auth-user'
     return if current_user
 
     render status: :unauthorized,
@@ -11,7 +10,6 @@ module AuthenticateRequest
   end
 
   def current_user
-    puts JsonWebToken.decode(request.headers['Authorization'].split.last)
     @current_user = nil
     return unless decoded_token
 
