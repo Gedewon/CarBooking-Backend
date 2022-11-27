@@ -178,6 +178,10 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    rswag (2.8.0)
+      rswag-api (= 2.8.0)
+      rswag-specs (= 2.8.0)
+      rswag-ui (= 2.8.0)
     rswag-api (2.8.0)
       railties (>= 3.1, < 7.1)
     rswag-specs (2.8.0)
@@ -225,6 +229,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.4)
   rspec-rails
+  rswag
   rswag-api
   rswag-specs
   rswag-ui
