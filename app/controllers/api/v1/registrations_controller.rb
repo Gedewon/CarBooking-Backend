@@ -19,8 +19,8 @@ class Api::V1::RegistrationsController < ApplicationController
   protected
 
   def success_user_created
-    response.headers['Authorization'] = "Bearer #{@token}"
-    render status: :created, template: 'auth/auth'
+    response.headers['Authorization'] = @token
+    render json: @user.as_json(only: %i[id name created_at updated_at]), status: :created
   end
 
   def error_token_create

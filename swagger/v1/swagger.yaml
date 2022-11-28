@@ -1,0 +1,294 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/cars":
+    get:
+      summary: list cars
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                all_cars:
+                  value:
+                  - id: 1
+                    name: Blue Bmw
+                    image: https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg
+                    amount: 22500
+                    created_at: '2022-11-26T00:23:10.364Z'
+                    updated_at: '2022-11-26T00:23:10.364Z'
+                  - id: 2
+                    name: 'Red Alfa Romeo C4 '
+                    image: https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg
+                    amount: 18500
+                    created_at: '2022-11-26T00:23:10.371Z'
+                    updated_at: '2022-11-26T00:23:10.371Z'
+                  - id: 3
+                    name: 'Yellow Chevroelt '
+                    image: https://images.pexels.com/photos/575386/pexels-photo-575386.jpeg
+                    amount: 37500
+                    created_at: '2022-11-26T00:23:10.377Z'
+                    updated_at: '2022-11-26T00:23:10.377Z'
+                  - id: 4
+                    name: Black Ferrari
+                    image: https://images.pexels.com/photos/9596562/pexels-photo-9596562.jpeg
+                    amount: 19600
+                    created_at: '2022-11-26T00:23:10.382Z'
+                    updated_at: '2022-11-26T00:23:10.382Z'
+                  - id: 5
+                    name: Sports Car
+                    image: https://images.pexels.com/photos/4674337/pexels-photo-4674337.jpeg
+                    amount: 44700
+                    created_at: '2022-11-26T00:23:10.389Z'
+                    updated_at: '2022-11-26T00:23:10.389Z'
+                  - id: 6
+                    name: Test car
+                    image: https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg
+                    amount: 22500
+                    created_at: '2022-11-26T17:56:37.104Z'
+                    updated_at: '2022-11-26T17:56:37.104Z'
+    post:
+      summary: create car
+      tags:
+      - Cars
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                create_car:
+                  value:
+                    id: 9
+                    name: tesla modlex
+                    image: https://someimage.png
+                    amount: 13433.0
+                    created_at: '2022-11-28T01:59:26.483Z'
+                    updated_at: '2022-11-28T01:59:26.483Z'
+        '401':
+          description: 'Unauthorized '
+          content:
+            application/json:
+              examples:
+                unauthorized_logout_request:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.auth.unauthenticated'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                image:
+                  type: string
+                amount:
+                  type: number
+              required:
+              - name
+              - password
+              - amount
+  "/api/v1/cars/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+  "/api/v1/auth/sign_up":
+    post:
+      summary: create registration
+      tags:
+      - SIGNUP
+      parameters: []
+      responses:
+        '201':
+          description: user created
+          headers:
+            Authorization:
+              schema:
+                type: string
+                nullable: true
+              description: 'Bearer Token that we use to login the user '
+          content:
+            application/json:
+              examples:
+                successfull_signup:
+                  value:
+                    status: Created
+                    message: created users
+                    data:
+                      id: 1
+                      name: jon doe
+                      created_at: '2022-10-01T23:14:34.994Z'
+                      updated_at: '2022-10-01T23:14:34.994Z'
+                    header:
+                      Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxMiwidG9rZW4iOiJ4dUFIck43ZGV6N3k1WlBSTXEzb0F1MW5mYVA5ODVLRyIsImV4cCI6MTY2OTY4MTI0NH0.D3J3CnrrX5K4WJMdVmtP5qjWcIHUIqQBAWsGWhi6hy7yZrUju8tzIslhdrXTC5tncOWEA8gADG89NqNeZxU5lg
+        '422':
+          description: 'failed user creat action '
+          content:
+            application/json:
+              examples:
+                blank_password:
+                  value:
+                    status: 422 Unprocessable Entity
+                    message: Error processing data
+                    data:
+                      errors:
+                      - Password can't be blank
+                blank_name:
+                  value:
+                    status: 422 Unprocessable Entity
+                    message: Error processing data
+                    data:
+                      errors:
+                      - Name can't be blank
+                blanK_body:
+                  value:
+                    status: 422 Unprocessable Entity
+                    message: Error processing data
+                    data:
+                      errors:
+                      - Password can't be blank
+                      - Name can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - password
+  "/api/v1/auth/sign_in":
+    post:
+      summary: create session
+      tags:
+      - Login
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          headers:
+            Authorization:
+              schema:
+                type: string
+                nullable: true
+              description: Bearer Token that we will use in other consecutive requests
+          content:
+            application/json:
+              examples:
+                successfull_login:
+                  value:
+                    data:
+                      token: Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJ0b2tlbiI6Ino1VDZQTWdUY2Y3TERtRmlwSG5TM3pTUFphU3dRWHlFIiwiZXhwIjoxNjY5NjgzMzc2fQ.8E9DtWViDxWW_QG7YHqb76_W69Ew02ovTdL26YM2DBmkdw8Px0amiGFrRJnqcZSiKAYJuAVsn43JmOlmWtaPRQ
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                invalid_username_or_password:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.auth.invalid_credentials'
+                missing_username_or_password:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.insufficient_params'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - password
+  "/api/v1/auth/sign_out":
+    delete:
+      summary: delete session
+      tags:
+      - Log out
+      parameters:
+      - name: logout
+        in: headers
+        schema:
+          type: object
+          properties:
+            Authorization:
+              type: string
+          required:
+          - Authorization
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              examples:
+                successfull_logout:
+                  value:
+                    data: {}
+        '401':
+          description: 'Unauthorized '
+          content:
+            application/json:
+              examples:
+                unauthorized_logout_request:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.auth.unauthenticated'
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

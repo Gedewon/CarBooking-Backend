@@ -1,13 +1,17 @@
 class Api::V1::CarsController < ApplicationController
   before_action :set_car, only: %i[show update destroy]
-  before_action :authenticate_user
+  before_action :authenticate_user, only: %i[destroy update create]
   def index
     @cars = Car.all
     render json: @cars
   end
 
   def show
-    render json: @car
+    if @car
+      render json: @car
+    else
+      render json: {}, status: :not_found
+    end
   end
 
   def create
@@ -36,6 +40,8 @@ class Api::V1::CarsController < ApplicationController
 
   def set_car
     @car = Car.find(params[:id])
+  rescue StandardError
+    @car = nil
   end
 
   def car_params
