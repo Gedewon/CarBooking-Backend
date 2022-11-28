@@ -127,21 +127,33 @@ paths:
       tags:
       - Log out
       parameters:
-      - name: login
-        in: header
+      - name: logout
+        in: headers
         schema:
           type: object
           properties:
-            name:
-              type: string
-            password:
+            Authorization:
               type: string
           required:
-          - name
-          - password
+          - Authorization
       responses:
-        '200':
-          description: successful
+        '204':
+          description: No Content
+          content:
+            application/json:
+              examples:
+                successfull_login:
+                  value:
+                    data: {}
+        '401':
+          description: 'Unauthorized '
+          content:
+            application/json:
+              examples:
+                unauthorized_logout_request:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.auth.unauthenticated'
 servers:
 - url: http://{defaultHost}
   variables:

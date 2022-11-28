@@ -28,7 +28,7 @@ RSpec.describe 'api/v1/sessions', type: :request do
       end
 
       response(422, 'Unprocessable Entity') do
-        let(:login) { { name: 'Gedewon', password: '12346' } }
+        let(:login) { { name: 'Gedewon' } }
         example 'application/json', :invalid_username_or_password, {
             errors: [
                "translation missing: en.errors.controllers.auth.invalid_credentials"
@@ -45,27 +45,31 @@ RSpec.describe 'api/v1/sessions', type: :request do
   end
 
   path '/api/v1/auth/sign_out' do
-
+    let(:logout) { {  } }
     delete('delete session') do
       tags "Log out"
       consumes 'application/json'
-      parameter name: :login, in: :header, schema: {
+      parameter name: :logout, in: :headers, schema: {
         type: :object,
         properties: { 
-          name: {type: :string},
-          password: {type: :string}
+          Authorization: {type: :string},
         },
-        required: ['name','password']
+        required: ['Authorization']
       }
-      response(200, 'successful') do
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+      response(204, 'No Content') do
+        example 'application/json', :successfull_logout, {
+          data: {
           }
-        end
+        }
+        run_test!
+      end
+
+      response(401, 'Unauthorized ') do
+        example 'application/json', :unauthorized_logout_request,{
+          errors: [
+            "translation missing: en.errors.controllers.auth.unauthenticated"
+          ]
+      }
         run_test!
       end
     end
