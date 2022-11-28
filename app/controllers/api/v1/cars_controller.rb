@@ -1,6 +1,6 @@
 class Api::V1::CarsController < ApplicationController
   before_action :set_car, only: %i[show update destroy]
-  before_action :authenticate_user
+  before_action :authenticate_user,only: [:destroy,:update,:create]
   def index
     @cars = Car.all
     render json: @cars

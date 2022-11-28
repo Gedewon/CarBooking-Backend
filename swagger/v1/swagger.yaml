@@ -4,6 +4,139 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/cars":
+    get:
+      summary: list cars
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                all_cars:
+                  value:
+                  - id: 1
+                    name: Blue Bmw
+                    image: https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg
+                    amount: 22500
+                    created_at: '2022-11-26T00:23:10.364Z'
+                    updated_at: '2022-11-26T00:23:10.364Z'
+                  - id: 2
+                    name: 'Red Alfa Romeo C4 '
+                    image: https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg
+                    amount: 18500
+                    created_at: '2022-11-26T00:23:10.371Z'
+                    updated_at: '2022-11-26T00:23:10.371Z'
+                  - id: 3
+                    name: 'Yellow Chevroelt '
+                    image: https://images.pexels.com/photos/575386/pexels-photo-575386.jpeg
+                    amount: 37500
+                    created_at: '2022-11-26T00:23:10.377Z'
+                    updated_at: '2022-11-26T00:23:10.377Z'
+                  - id: 4
+                    name: Black Ferrari
+                    image: https://images.pexels.com/photos/9596562/pexels-photo-9596562.jpeg
+                    amount: 19600
+                    created_at: '2022-11-26T00:23:10.382Z'
+                    updated_at: '2022-11-26T00:23:10.382Z'
+                  - id: 5
+                    name: Sports Car
+                    image: https://images.pexels.com/photos/4674337/pexels-photo-4674337.jpeg
+                    amount: 44700
+                    created_at: '2022-11-26T00:23:10.389Z'
+                    updated_at: '2022-11-26T00:23:10.389Z'
+                  - id: 6
+                    name: Test car
+                    image: https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg
+                    amount: 22500
+                    created_at: '2022-11-26T17:56:37.104Z'
+                    updated_at: '2022-11-26T17:56:37.104Z'
+    post:
+      summary: create car
+      tags:
+      - Cars
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                create_car:
+                  value:
+                    id: 9
+                    name: tesla modlex
+                    image: https://someimage.png
+                    amount: 13433.0
+                    created_at: '2022-11-28T01:59:26.483Z'
+                    updated_at: '2022-11-28T01:59:26.483Z'
+        '401':
+          description: 'Unauthorized '
+          content:
+            application/json:
+              examples:
+                unauthorized_logout_request:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.auth.unauthenticated'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                image:
+                  type: string
+                amount:
+                  type: number
+              required:
+              - name
+              - password
+              - amount
+  "/api/v1/cars/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete car
+      tags:
+      - Cars
+      responses:
+        '200':
+          description: successful
   "/api/v1/auth/sign_up":
     post:
       summary: create registration
@@ -142,7 +275,7 @@ paths:
           content:
             application/json:
               examples:
-                successfull_login:
+                successfull_logout:
                   value:
                     data: {}
         '401':
