@@ -99,72 +99,84 @@ RSpec.describe 'api/v1/cars', type: :request do
 
   path '/api/v1/cars/{id}' do
 
-    # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show car') do
       tags 'Cars'
       response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        let(:id) { '1' }
+        example 'application/json', :create_car, {
+            "id": 1,
+            "name": "Blue Bmw",
+            "image": "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
+            "amount": 22500,
+            "created_at": "2022-11-26T00:23:10.364Z",
+            "updated_at": "2022-11-26T00:23:10.364Z"
+       }
         run_test!
       end
     end
 
     patch('update car') do
       tags 'Cars'
-
+      parameter name: :update_car, in: :body, schema: {
+        type: :object,
+        properties: {
+          name:{ type: :string},
+          image: {type: :string},
+          amount: {type: :number}
+        },
+        required: ['name','password','amount']
+      }
+      parameter name: :Authorization, in: :header,  type: :string , description: 'Bearer **'
       response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        let(:id) { '1' }
+        let(:update_car){{ name:"newCarName",image:"https://newcarname.png",amount:3433.0}}
+        example 'application/json', :patch_existing_products, {
+          "name": "newCarName",
+          "image": "https://newcarname.png",
+          "amount": 3433.0,
+          "id": 1,
+          "created_at": "2022-11-26T00:23:10.364Z",
+          "updated_at": "2022-11-28T20:03:29.467Z"
+       }
         run_test!
       end
     end
 
     put('update car') do
       tags 'Cars'
-
+      parameter name: :put_car, in: :body, schema: {
+        type: :object,
+        properties: {
+          name:{ type: :string},
+          image: {type: :string},
+          amount: {type: :number}
+        },
+        required: ['name','password','amount']
+      }
+      parameter name: :Authorization, in: :header,  type: :string , description: 'Bearer **'
+     
       response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        let(:id) { '1' }
+        let(:put_car){{name:'newCarName',image:'https://newcarname.png',amount:3433.0}}
+        example 'application/json', :patch_existing_products,{
+          "name": "newCarName",
+          "image": "https://newcarname.png",
+          "amount": 3433.0,
+          "id": 1,
+          "created_at": "2022-11-26T00:23:10.364Z",
+          "updated_at": "2022-11-28T20:15:28.643Z"
+       }
         run_test!
       end
     end
 
     delete('delete car') do
       tags 'Cars'
-
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+      parameter name: :Authorization, in: :header,  type: :string , description: 'Bearer **'
+      response(204, 'successful') do
+        let(:id) { '1' }
         run_test!
       end
     end
