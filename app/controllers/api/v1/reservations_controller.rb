@@ -8,9 +8,9 @@ class Api::V1::ReservationsController < ApplicationController
 
   def show
     if @reservation
-    render json: @reservation
-    else 
-    render json: {} , status: :not_found
+      render json: @reservation
+    else
+      render json: {}, status: :not_found
     end
   end
 
@@ -25,33 +25,27 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def update
-    begin
-      if @reservation.update(reservation_params)
-        render json: @reservation
-      else
-        render json: @reservation.errors, status: :unprocessable_entity
-      end
-    rescue => exception
-        render json:{} , status: :internal_server_error
+    if @reservation.update(reservation_params)
+      render json: @reservation
+    else
+      render json: @reservation.errors, status: :unprocessable_entity
     end
+  rescue StandardError
+    render json: {}, status: :internal_server_error
   end
 
   def destroy
-    begin
-      @reservation.destroy
-    rescue => exception
-      render json:{},status: :internal_server_error
-    end
+    @reservation.destroy
+  rescue StandardError
+    render json: {}, status: :internal_server_error
   end
 
   private
 
   def set_reservation
-    begin
-      @reservation = Reservation.find(params[:id])
-    rescue => exception
-      @reservation =nil
-    end
+    @reservation = Reservation.find(params[:id])
+  rescue StandardError
+    @reservation = nil
   end
 
   def reservation_params
