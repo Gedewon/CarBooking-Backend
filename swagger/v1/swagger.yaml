@@ -7,11 +7,74 @@ paths:
   "/api/v1/auth/sign_up":
     post:
       summary: create registration
+      tags:
+      - SIGNUP
+      parameters: []
       responses:
-        '200':
-          description: successful
+        '201':
+          description: user created
+          headers:
+            Authorization:
+              schema:
+                type: string
+                nullable: true
+              description: 'Bearere Token that we use to login the user '
+          content:
+            application/json:
+              examples:
+                successfull_signup:
+                  value:
+                    status: Created
+                    message: created users
+                    data:
+                      id: 1
+                      name: jon doe
+                      created_at: '2022-10-01T23:14:34.994Z'
+                      updated_at: '2022-10-01T23:14:34.994Z'
+                    header:
+                      Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxMiwidG9rZW4iOiJ4dUFIck43ZGV6N3k1WlBSTXEzb0F1MW5mYVA5ODVLRyIsImV4cCI6MTY2OTY4MTI0NH0.D3J3CnrrX5K4WJMdVmtP5qjWcIHUIqQBAWsGWhi6hy7yZrUju8tzIslhdrXTC5tncOWEA8gADG89NqNeZxU5lg
+        '422':
+          description: 'failed user creat action '
+          content:
+            application/json:
+              examples:
+                blank_password:
+                  value:
+                    status: 422 Unprocessable Entity
+                    message: Error processing data
+                    data:
+                      errors:
+                      - Password can't be blank
+                blank_name:
+                  value:
+                    status: 422 Unprocessable Entity
+                    message: Error processing data
+                    data:
+                      errors:
+                      - Name can't be blank
+                blanK_body:
+                  value:
+                    status: 422 Unprocessable Entity
+                    message: Error processing data
+                    data:
+                      errors:
+                      - Password can't be blank
+                      - Name can't be blank
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - password
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000
