@@ -120,7 +120,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "sdf": {
+                  "create_car": {
                     "value": {
                       "id": 9,
                       "name": "tesla modlex",
@@ -439,36 +439,116 @@
     "/api/v1/reservations": {
       "get": {
         "summary": "list reservations",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
       "post": {
         "summary": "create reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          },
+          {
+            "name": "creat_resrvation",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "car_id": {
+                  "type": "number"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "car_id",
+                "start_date",
+                "end_date",
+                "city"
+              ]
+            }
+          }
+        ],
         "responses": {
-          "200": {
+          "201": {
             "description": "successful"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
     },
     "/api/v1/reservations/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "type": "string",
-          "description": "id",
-          "required": true
-        }
-      ],
       "get": {
         "summary": "show reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id",
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Bearer **"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
