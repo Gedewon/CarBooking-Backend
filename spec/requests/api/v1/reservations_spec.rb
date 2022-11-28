@@ -163,6 +163,18 @@ RSpec.describe 'api/v1/reservations', type: :request do
         end
         run_test!
       end
+      response(401, 'Internal Server Error') do
+        let(:id) { '-1' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
 
     put('update reservation') do
@@ -218,11 +230,50 @@ RSpec.describe 'api/v1/reservations', type: :request do
         end
         run_test!
       end
+      response(401, 'Internal Server Error') do
+        let(:id) { '-1' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
 
     delete('delete reservation') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+      tags 'Reservation'
+      parameter name: 'id', in: :path, type: :string, description: 'id'
+      parameter name: :Authorization , in: :header, type: :string, required: true, description: 'Bearer **'
+      response(204, 'successful') do
+        let(:id) { '2' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+      response(500, 'Internal Server Error') do
+        let(:id) { '-1' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+      response(401, 'Internal Server Error') do
+        let(:id) { '-1' }
 
         after do |example|
           example.metadata[:response][:content] = {

@@ -37,7 +37,11 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation.destroy
+    begin
+      @reservation.destroy
+    rescue => exception
+      render json:{},status: :internal_server_error
+    end
   end
 
   private
