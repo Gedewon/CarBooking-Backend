@@ -330,7 +330,7 @@
       "post": {
         "summary": "create registration",
         "tags": [
-          "SIGNUP"
+          "session"
         ],
         "consumes": [
           "application/json"
@@ -719,7 +719,7 @@
       "post": {
         "summary": "create session",
         "tags": [
-          "Login"
+          "session"
         ],
         "consumes": [
           "application/json"
@@ -801,7 +801,7 @@
       "delete": {
         "summary": "delete session",
         "tags": [
-          "Log out"
+          "session"
         ],
         "consumes": [
           "application/json"

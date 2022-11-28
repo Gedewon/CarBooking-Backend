@@ -6,7 +6,7 @@ RSpec.describe 'api/v1/registrations', type: :request do
   path '/api/v1/auth/sign_up' do
  
     post('create registration') do
-      tags 'SIGNUP'
+      tags 'session'
       consumes 'application/json'
       parameter name: :sign_up, in: :body, schema: {
         type: :object,
