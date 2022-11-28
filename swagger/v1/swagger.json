@@ -120,7 +120,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "create_car": {
+                  "sdf": {
                     "value": {
                       "id": 9,
                       "name": "tesla modlex",
@@ -320,7 +320,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "successful"
           }
         }
@@ -432,6 +432,67 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/reservations": {
+      "get": {
+        "summary": "list reservations",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "create reservation",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/api/v1/reservations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show reservation",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update reservation",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update reservation",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete reservation",
+        "responses": {
+          "200": {
+            "description": "successful"
           }
         }
       }
