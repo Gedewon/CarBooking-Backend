@@ -73,6 +73,75 @@ paths:
               required:
               - name
               - password
+  "/api/v1/auth/sign_in":
+    post:
+      summary: create session
+      tags:
+      - Login
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          headers:
+            Authorization:
+              schema:
+                type: string
+                nullable: true
+              description: Bearer Token that we will use in other consecutive requests
+          content:
+            application/json:
+              examples:
+                successfull_login:
+                  value:
+                    data:
+                      token: Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJ0b2tlbiI6Ino1VDZQTWdUY2Y3TERtRmlwSG5TM3pTUFphU3dRWHlFIiwiZXhwIjoxNjY5NjgzMzc2fQ.8E9DtWViDxWW_QG7YHqb76_W69Ew02ovTdL26YM2DBmkdw8Px0amiGFrRJnqcZSiKAYJuAVsn43JmOlmWtaPRQ
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                invalid_username_or_password:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.auth.invalid_credentials'
+                missing_username_or_password:
+                  value:
+                    errors:
+                    - 'translation missing: en.errors.controllers.insufficient_params'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - password
+  "/api/v1/auth/sign_out":
+    delete:
+      summary: delete session
+      tags:
+      - Log out
+      parameters:
+      - name: login
+        in: header
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            password:
+              type: string
+          required:
+          - name
+          - password
+      responses:
+        '200':
+          description: successful
 servers:
 - url: http://{defaultHost}
   variables:
