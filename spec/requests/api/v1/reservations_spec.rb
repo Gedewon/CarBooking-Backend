@@ -166,9 +166,49 @@ RSpec.describe 'api/v1/reservations', type: :request do
     end
 
     put('update reservation') do
+      tags 'Reservation'
+      parameter name: 'id', in: :path, type: :string, description: 'id'
+      parameter name: :Authorization , in: :header, type: :string, required: true, description: 'Bearer **'
+      parameter name: :patch_reservation, in: :body, schema: {
+        type: :object,
+        properties: {
+          car_id:{ type: :number},
+          start_date: {type: :string},
+          end_date: {type: :string},
+          city: {type: :string},
+        },
+        required: ['car_id','start_date','end_date','city']
+      }
       response(200, 'successful') do
-        let(:id) { '123' }
-
+        let(:id){'2'}
+        let(:patch_reservation) { {
+          "car_id": 2,
+          "start_date": "2022-11-26T17:15:16.489Z",
+          "end_date": "2022-11-26T17:15:16.489Z",
+          "city": "Adiss ababa"
+         } }
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+      response(422, 'Unprocessable Entity') do
+        let(:path_reservation) { {car_id:-1}}
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+      response(500, 'Internal Server Error') do
+        let(:id) { '-1' }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
