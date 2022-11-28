@@ -7,7 +7,11 @@ class Api::V1::CarsController < ApplicationController
   end
 
   def show
-    render json: @car
+    if @car
+      render json: @car
+    else 
+      render json:{} , status: :not_found 
+    end
   end
 
   def create
@@ -35,7 +39,11 @@ class Api::V1::CarsController < ApplicationController
   private
 
   def set_car
-    @car = Car.find(params[:id])
+    begin
+      @car = Car.find(params[:id])
+    rescue => exception
+      @car = nil       
+    end
   end
 
   def car_params
