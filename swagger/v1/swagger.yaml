@@ -18,7 +18,7 @@ paths:
               schema:
                 type: string
                 nullable: true
-              description: 'Bearere Token that we use to login the user '
+              description: 'Bearer Token that we use to login the user '
           content:
             application/json:
               examples:

@@ -18,7 +18,7 @@ RSpec.describe 'api/v1/registrations', type: :request do
       }
       response '201', 'user created' do 
         let(:sign_up) { { name: 'Gedewon', password: '12346' } }
-        header 'Authorization', schema: { type: :string, nullable: true }, description: 'Bearere Token that we use to login the user '
+        header 'Authorization', schema: { type: :string, nullable: true }, description: 'Bearer Token that we use to login the user '
         example 'application/json', :successfull_signup, {
           status: 'Created',
           message: 'created users',
