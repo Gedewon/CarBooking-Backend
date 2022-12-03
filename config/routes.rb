@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
+      get 'auth/imagekit' ,to: 'imagekit#index'
       post 'auth/sign_up', to: 'registrations#create'
       post 'auth/sign_in', to: 'sessions#create'
       delete 'auth/sign_out', to: 'sessions#destroy'
