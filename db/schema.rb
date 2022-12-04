@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_04_010744) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_04_022125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,7 +23,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_010744) do
     t.string "car_type"
     t.string "brand"
     t.string "color"
+    t.boolean "rented", default: false
     t.index ["car_type"], name: "index_cars_on_car_type"
+    t.index ["rented"], name: "index_cars_on_rented"
   end
 
   create_table "reservations", force: :cascade do |t|
