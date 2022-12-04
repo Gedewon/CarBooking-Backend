@@ -45,6 +45,6 @@ class Api::V1::CarsController < ApplicationController
   end
 
   def car_params
-    params.require(:car).permit(:name, :image, :amount)
+    params.require(:car).permit(:name, :image, :amount, :brand, :car_type, :color, :rented)
   end
 end
