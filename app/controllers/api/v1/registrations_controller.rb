@@ -34,6 +34,6 @@ class Api::V1::RegistrationsController < ApplicationController
   private
 
   def registration_params
-    params.permit(:name, :password)
+    params.permit(:name, :password, :password_confirmation, :email, :image_url, :date_of_birth)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_26_000919) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_03_235057) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_000919) do
     t.string "role", default: "website_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "image_url"
+    t.date "date_of_birth"
+    t.index ["image_url"], name: "index_users_on_image_url"
   end
 
   add_foreign_key "reservations", "cars"
