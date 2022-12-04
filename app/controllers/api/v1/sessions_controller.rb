@@ -4,9 +4,9 @@ class Api::V1::SessionsController < ApplicationController
   before_action :authenticate_user, only: %i[validate_token destroy]
 
   def create
-    return error_insufficient_params unless params[:name].present? && params[:password].present?
+    return error_insufficient_params unless params[:email].present? && params[:password].present?
 
-    @user = User.find_by(name: params[:name])
+    @user = User.find_by(email: params[:email])
     return error_invalid_credentials unless @user
     return error_invalid_credentials unless @user.authenticate(params[:password])
 
