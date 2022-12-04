@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_03_235057) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_04_010744) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_03_235057) do
     t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "car_type"
+    t.string "brand"
+    t.string "color"
+    t.index ["car_type"], name: "index_cars_on_car_type"
   end
 
   create_table "reservations", force: :cascade do |t|
