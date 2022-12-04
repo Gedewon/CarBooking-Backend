@@ -17,6 +17,12 @@ class Api::V1::SessionsController < ApplicationController
     success_session_created
   end
 
+  def validate_token
+    @token = request.headers['Authorization']
+    @user = current_user
+    render json: @user.as_json(only: %i[id name created_at updated_at image_url email date_of_birth role]), status: :ok
+  end
+
   def destroy
     headers = request.headers['Authorization'].split.last
     session = Session.find_by(token: JsonWebToken.decode(headers)[:token])
