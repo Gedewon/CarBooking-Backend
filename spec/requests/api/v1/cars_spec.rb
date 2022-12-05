@@ -72,9 +72,9 @@ RSpec.describe 'api/v1/cars', type: :request do
           brand: { type: :string },
           car_type: { type: :string },
           color: { type: :string },
-          rented: { type: :boolean}
+          rented: { type: :boolean }
         },
-        required: %w[name password amount brand car_type color ]
+        required: %w[name password amount brand car_type color]
       }
       parameter name: :Authorization, in: :header, type: :string, description: 'Bearer **'
       response(201, 'successful') do
@@ -131,7 +131,7 @@ RSpec.describe 'api/v1/cars', type: :request do
           brand: { type: :string },
           car_type: { type: :string },
           color: { type: :string },
-          rented: { type: :boolean}
+          rented: { type: :boolean }
         },
         required: %w[name password amount brand car_type color]
       }
@@ -162,7 +162,7 @@ RSpec.describe 'api/v1/cars', type: :request do
           brand: { type: :string },
           car_type: { type: :string },
           color: { type: :string },
-          rented: { type: :boolean}
+          rented: { type: :boolean }
         },
         required: %w[name password amount brand car_type color]
       }

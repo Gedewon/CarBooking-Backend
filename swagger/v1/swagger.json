@@ -854,6 +854,57 @@
         }
       }
     },
+    "/api/v1/auth/validate_token": {
+      "post": {
+        "summary": "validate token ",
+        "tags": [
+          "session"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer token to validate if token is valid and doesn't expired."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid token",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "successfull_logout": {
+                    "value": {
+                      "data": {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized invalid token ",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalid_token": {
+                    "value": {
+                      "data": {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/sign_out": {
       "delete": {
         "summary": "delete session",

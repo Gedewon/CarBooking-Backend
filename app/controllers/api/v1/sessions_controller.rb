@@ -34,7 +34,8 @@ class Api::V1::SessionsController < ApplicationController
 
   def success_session_created
     response.headers['Authorization'] = @token
-    render json: @user.as_json(only: %i[id name created_at updated_at image_url email date_of_birth role]), status: :created
+    render json: @user.as_json(only: %i[id name created_at updated_at image_url email date_of_birth role]),
+           status: :created
   end
 
   def success_session_destroy

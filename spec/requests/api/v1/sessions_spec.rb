@@ -42,7 +42,27 @@ RSpec.describe 'api/v1/sessions', type: :request do
       end
     end
   end
+  path '/api/v1/auth/validate_token' do
+    post('validate token ') do
+      tags 'session'
+      consumes 'application/json'
+      parameter name: :Authorization, in: :header, type: :string,
+                description: 'Bearer token to validate if token is valid and doesn\'t expired.'
 
+      response(200, 'Valid token') do
+        example 'application/json', :successfull_logout, {
+          data: {}
+        }
+        run_test!
+      end
+      response(401, 'Unauthorized invalid token ') do
+        example 'application/json', :invalid_token, {
+          data: {}
+        }
+        run_test!
+      end
+    end
+  end
   path '/api/v1/auth/sign_out' do
     let(:logout) { {} }
     delete('delete session') do
