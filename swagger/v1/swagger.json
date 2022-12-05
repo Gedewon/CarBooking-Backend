@@ -820,19 +820,10 @@
         ],
         "parameters": [
           {
-            "name": "logout",
-            "in": "headers",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Authorization": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "Authorization"
-              ]
-            }
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
           }
         ],
         "responses": {

@@ -48,13 +48,7 @@ RSpec.describe 'api/v1/sessions', type: :request do
     delete('delete session') do
       tags 'session'
       consumes 'application/json'
-      parameter name: :logout, in: :headers, schema: {
-        type: :object,
-        properties: {
-          Authorization: { type: :string }
-        },
-        required: ['Authorization']
-      }
+      parameter name: :Authorization, in: :header, type: :string, description: 'Bearer **'
       response(204, 'No Content') do
         example 'application/json', :successfull_logout, {
           data: {}
