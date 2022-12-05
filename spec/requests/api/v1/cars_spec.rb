@@ -158,9 +158,13 @@ RSpec.describe 'api/v1/cars', type: :request do
         properties: {
           name: { type: :string },
           image: { type: :string },
-          amount: { type: :number }
+          amount: { type: :number },
+          brand: { type: :string },
+          car_type: { type: :string },
+          color: { type: :string },
+          rented: { type: :boolean}
         },
-        required: %w[name password amount]
+        required: %w[name password amount brand car_type color]
       }
       parameter name: :Authorization, in: :header, type: :string, description: 'Bearer **'
 
