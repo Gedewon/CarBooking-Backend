@@ -9,9 +9,12 @@ RSpec.describe 'api/v1/registrations', type: :request do
         type: :object,
         properties: {
           name: { type: :string },
-          password: { type: :string }
+          password: { type: :string },
+          email: { type: :string },
+          image_url: { type: :string },
+          date_of_birth: { type: :date }
         },
-        required: %w[name password]
+        required: %w[name password email image_url date_of_birth]
       }
       response '201', 'user created' do
         let(:sign_up) { { name: 'Gedewon', password: '12346' } }

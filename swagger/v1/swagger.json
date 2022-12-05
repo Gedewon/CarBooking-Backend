@@ -347,11 +347,23 @@
                 },
                 "password": {
                   "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "image_url": {
+                  "type": "string"
+                },
+                "date_of_birth": {
+                  "type": "date"
                 }
               },
               "required": [
                 "name",
-                "password"
+                "password",
+                "email",
+                "image_url",
+                "date_of_birth"
               ]
             }
           }
@@ -382,7 +394,7 @@
                         "updated_at": "2022-10-01T23:14:34.994Z"
                       },
                       "header": {
-                        "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxMiwidG9rZW4iOiJ4dUFIck43ZGV6N3k1WlBSTXEzb0F1MW5mYVA5ODVLRyIsImV4cCI6MTY2OTY4MTI0NH0.D3J3CnrrX5K4WJMdVmtP5qjWcIHUIqQBAWsGWhi6hy7yZrUju8tzIslhdrXTC5tncOWEA8gADG89NqNeZxU5lg"
+                        "Authorization": "Bearer **"
                       }
                     }
                   }
@@ -763,7 +775,7 @@
                   "successfull_login": {
                     "value": {
                       "data": {
-                        "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJ0b2tlbiI6Ino1VDZQTWdUY2Y3TERtRmlwSG5TM3pTUFphU3dRWHlFIiwiZXhwIjoxNjY5NjgzMzc2fQ.8E9DtWViDxWW_QG7YHqb76_W69Ew02ovTdL26YM2DBmkdw8Px0amiGFrRJnqcZSiKAYJuAVsn43JmOlmWtaPRQ"
+                        "token": "Bearer **"
                       }
                     }
                   }
