@@ -8,14 +8,14 @@ RSpec.describe 'api/v1/sessions', type: :request do
       parameter name: :login, in: :body, schema: {
         type: :object,
         properties: {
-          name: { type: :string },
+          email: { type: :string },
           password: { type: :string }
         },
-        required: %w[name password]
+        required: %w[email password]
       }
 
-      response(200, 'successful') do
-        let(:login) { { name: 'Gedewon', password: '12346' } }
+      response(201, 'successful') do
+        let(:login) { { email: 'gedewon@gmail.com', password: '12346' } }
         header 'Authorization', schema: { type: :string, nullable: true },
                                 description: 'Bearer Token that we will use in other consecutive requests'
         example 'application/json', :successfull_login, {
@@ -27,7 +27,7 @@ RSpec.describe 'api/v1/sessions', type: :request do
       end
 
       response(422, 'Unprocessable Entity') do
-        let(:login) { { name: 'Gedewon' } }
+        let(:login) { { email: 'gedewon@gmail.co' } }
         example 'application/json', :invalid_username_or_password, {
           errors: [
             'translation missing: en.errors.controllers.auth.invalid_credentials'

@@ -743,7 +743,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "email": {
                   "type": "string"
                 },
                 "password": {
@@ -751,14 +751,14 @@
                 }
               },
               "required": [
-                "name",
+                "email",
                 "password"
               ]
             }
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "successful",
             "headers": {
               "Authorization": {
