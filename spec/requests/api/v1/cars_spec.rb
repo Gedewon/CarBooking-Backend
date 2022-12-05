@@ -68,12 +68,16 @@ RSpec.describe 'api/v1/cars', type: :request do
         properties: {
           name: { type: :string },
           image: { type: :string },
-          amount: { type: :number }
+          amount: { type: :number },
+          brand: { type: :string },
+          car_type: { type: :string },
+          color: { type: :string },
+          rented: { type: :boolean}
         },
-        required: %w[name password amount]
+        required: %w[name password amount brand car_type color ]
       }
       parameter name: :Authorization, in: :header, type: :string, description: 'Bearer **'
-      response(200, 'successful') do
+      response(201, 'successful') do
         let(:creat_car) { { name: 'tesla modlex', image: 'https://someimage.png', amount: 13_433 } }
         example 'application/json', :create_car, {
           id: 9,

@@ -98,12 +98,27 @@
                 },
                 "amount": {
                   "type": "number"
+                },
+                "brand": {
+                  "type": "string"
+                },
+                "car_type": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "rented": {
+                  "type": "boolean"
                 }
               },
               "required": [
                 "name",
                 "password",
-                "amount"
+                "amount",
+                "brand",
+                "car_type",
+                "color"
               ]
             }
           },
@@ -115,7 +130,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "successful",
             "content": {
               "application/json": {
