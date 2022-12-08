@@ -1,0 +1,971 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/cars": {
+      "get": {
+        "summary": "list cars",
+        "tags": [
+          "Cars"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "all_cars": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "Blue Bmw",
+                        "image": "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
+                        "amount": 22500,
+                        "created_at": "2022-11-26T00:23:10.364Z",
+                        "updated_at": "2022-11-26T00:23:10.364Z"
+                      },
+                      {
+                        "id": 2,
+                        "name": "Red Alfa Romeo C4 ",
+                        "image": "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg",
+                        "amount": 18500,
+                        "created_at": "2022-11-26T00:23:10.371Z",
+                        "updated_at": "2022-11-26T00:23:10.371Z"
+                      },
+                      {
+                        "id": 3,
+                        "name": "Yellow Chevroelt ",
+                        "image": "https://images.pexels.com/photos/575386/pexels-photo-575386.jpeg",
+                        "amount": 37500,
+                        "created_at": "2022-11-26T00:23:10.377Z",
+                        "updated_at": "2022-11-26T00:23:10.377Z"
+                      },
+                      {
+                        "id": 4,
+                        "name": "Black Ferrari",
+                        "image": "https://images.pexels.com/photos/9596562/pexels-photo-9596562.jpeg",
+                        "amount": 19600,
+                        "created_at": "2022-11-26T00:23:10.382Z",
+                        "updated_at": "2022-11-26T00:23:10.382Z"
+                      },
+                      {
+                        "id": 5,
+                        "name": "Sports Car",
+                        "image": "https://images.pexels.com/photos/4674337/pexels-photo-4674337.jpeg",
+                        "amount": 44700,
+                        "created_at": "2022-11-26T00:23:10.389Z",
+                        "updated_at": "2022-11-26T00:23:10.389Z"
+                      },
+                      {
+                        "id": 6,
+                        "name": "Test car",
+                        "image": "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
+                        "amount": 22500,
+                        "created_at": "2022-11-26T17:56:37.104Z",
+                        "updated_at": "2022-11-26T17:56:37.104Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create car",
+        "tags": [
+          "Cars"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "creat_car",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "brand": {
+                  "type": "string"
+                },
+                "car_type": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "rented": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "password",
+                "amount",
+                "brand",
+                "car_type",
+                "color"
+              ]
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "create_car": {
+                    "value": {
+                      "id": 9,
+                      "name": "tesla modlex",
+                      "image": "https://someimage.png",
+                      "amount": 13433.0,
+                      "created_at": "2022-11-28T01:59:26.483Z",
+                      "updated_at": "2022-11-28T01:59:26.483Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized ",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "unauthorized_logout_request": {
+                    "value": {
+                      "errors": [
+                        "translation missing: en.errors.controllers.auth.unauthenticated"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cars/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show car",
+        "tags": [
+          "Cars"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "create_car": {
+                    "value": {
+                      "id": 1,
+                      "name": "Blue Bmw",
+                      "image": "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
+                      "amount": 22500,
+                      "created_at": "2022-11-26T00:23:10.364Z",
+                      "updated_at": "2022-11-26T00:23:10.364Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update car",
+        "tags": [
+          "Cars"
+        ],
+        "parameters": [
+          {
+            "name": "update_car",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "brand": {
+                  "type": "string"
+                },
+                "car_type": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "rented": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "password",
+                "amount",
+                "brand",
+                "car_type",
+                "color"
+              ]
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "patch_existing_products": {
+                    "value": {
+                      "name": "newCarName",
+                      "image": "https://newcarname.png",
+                      "amount": 3433.0,
+                      "id": 1,
+                      "created_at": "2022-11-26T00:23:10.364Z",
+                      "updated_at": "2022-11-28T20:03:29.467Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update car",
+        "tags": [
+          "Cars"
+        ],
+        "parameters": [
+          {
+            "name": "put_car",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "brand": {
+                  "type": "string"
+                },
+                "car_type": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "rented": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "name",
+                "password",
+                "amount",
+                "brand",
+                "car_type",
+                "color"
+              ]
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "patch_existing_products": {
+                    "value": {
+                      "name": "newCarName",
+                      "image": "https://newcarname.png",
+                      "amount": 3433.0,
+                      "id": 1,
+                      "created_at": "2022-11-26T00:23:10.364Z",
+                      "updated_at": "2022-11-28T20:15:28.643Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete car",
+        "tags": [
+          "Cars"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sign_up": {
+      "post": {
+        "summary": "create registration",
+        "tags": [
+          "session"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sign_up",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "image_url": {
+                  "type": "string"
+                },
+                "date_of_birth": {
+                  "type": "date"
+                }
+              },
+              "required": [
+                "name",
+                "password",
+                "email",
+                "image_url",
+                "date_of_birth"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "user created",
+            "headers": {
+              "Authorization": {
+                "schema": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "description": "Bearer Token that we use to login the user "
+              }
+            },
+            "content": {
+              "application/json": {
+                "examples": {
+                  "successfull_signup": {
+                    "value": {
+                      "status": "Created",
+                      "message": "created users",
+                      "data": {
+                        "id": 1,
+                        "name": "jon doe",
+                        "created_at": "2022-10-01T23:14:34.994Z",
+                        "updated_at": "2022-10-01T23:14:34.994Z"
+                      },
+                      "header": {
+                        "Authorization": "Bearer **"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "failed user creat action ",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "blank_password": {
+                    "value": {
+                      "status": "422 Unprocessable Entity",
+                      "message": "Error processing data",
+                      "data": {
+                        "errors": [
+                          "Password can't be blank"
+                        ]
+                      }
+                    }
+                  },
+                  "blank_name": {
+                    "value": {
+                      "status": "422 Unprocessable Entity",
+                      "message": "Error processing data",
+                      "data": {
+                        "errors": [
+                          "Name can't be blank"
+                        ]
+                      }
+                    }
+                  },
+                  "blanK_body": {
+                    "value": {
+                      "status": "422 Unprocessable Entity",
+                      "message": "Error processing data",
+                      "data": {
+                        "errors": [
+                          "Password can't be blank",
+                          "Name can't be blank"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reservations": {
+      "get": {
+        "summary": "list reservations",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "create reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          },
+          {
+            "name": "creat_resrvation",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "car_id": {
+                  "type": "number"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "car_id",
+                "start_date",
+                "end_date",
+                "city"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/v1/reservations/{id}": {
+      "get": {
+        "summary": "show reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id",
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id",
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Bearer **"
+          },
+          {
+            "name": "patch_reservation",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "car_id": {
+                  "type": "number"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "car_id",
+                "start_date",
+                "end_date",
+                "city"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "summary": "update reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id",
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Bearer **"
+          },
+          {
+            "name": "patch_reservation",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "car_id": {
+                  "type": "number"
+                },
+                "start_date": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "car_id",
+                "start_date",
+                "end_date",
+                "city"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete reservation",
+        "tags": [
+          "Reservation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id",
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sign_in": {
+      "post": {
+        "summary": "create session",
+        "tags": [
+          "session"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful",
+            "headers": {
+              "Authorization": {
+                "schema": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "description": "Bearer Token that we will use in other consecutive requests"
+              }
+            },
+            "content": {
+              "application/json": {
+                "examples": {
+                  "successfull_login": {
+                    "value": {
+                      "data": {
+                        "token": "Bearer **"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalid_username_or_password": {
+                    "value": {
+                      "errors": [
+                        "translation missing: en.errors.controllers.auth.invalid_credentials"
+                      ]
+                    }
+                  },
+                  "missing_username_or_password": {
+                    "value": {
+                      "errors": [
+                        "translation missing: en.errors.controllers.insufficient_params"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/validate_token": {
+      "post": {
+        "summary": "validate token ",
+        "tags": [
+          "session"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer token to validate if token is valid and doesn't expired."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Valid token",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "successfull_logout": {
+                    "value": {
+                      "data": {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized invalid token ",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalid_token": {
+                    "value": {
+                      "data": {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sign_out": {
+      "delete": {
+        "summary": "delete session",
+        "tags": [
+          "session"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "description": "Bearer **"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "successfull_logout": {
+                    "value": {
+                      "data": {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized ",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "unauthorized_logout_request": {
+                    "value": {
+                      "errors": [
+                        "translation missing: en.errors.controllers.auth.unauthenticated"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost:3000"
+        }
+      }
+    }
+  ]
+}
